@@ -1,10 +1,16 @@
 package com.yml.tictactoe;
 
 public class TicTacToeGame {
-	char board[] = new char[10] ;
+	private char board[] = new char[10] ;
 	
-	public void ticTacToegame() {
+	public void ticTacToeGame() {
 		
+	}
+	
+	public void createBoard() {
+		for(int i=1;i<10;i++) {
+			board[i] = ' ';
+		}
 	}
 
 }
