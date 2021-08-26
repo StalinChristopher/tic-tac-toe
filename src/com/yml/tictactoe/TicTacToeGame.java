@@ -1,10 +1,10 @@
 package com.yml.tictactoe;
 
 public class TicTacToeGame {
-
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-
+	char board[] = new char[10] ;
+	
+	public void ticTacToegame() {
+		
 	}
 
 }
