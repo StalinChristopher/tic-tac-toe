@@ -24,6 +24,9 @@ public class TicTacToeGame {
 		}
 	}
 	
+	/**
+	 * @method to set player's letter choice
+	 */
 	public void choice() {
 		System.out.println("Choose the letter(X/O) ");
 		char ch = in.next().charAt(0);
@@ -34,8 +37,17 @@ public class TicTacToeGame {
 			playerChoice = 'O';
 			computerChoice = 'X';
 		}
-			
-		
+	}
+	
+	public void showBoard() {
+		System.out.println("Displaying the board:\n");
+		System.out.println("--------------");
+		System.out.println(board[1]+" | "+board[2]+" | "+board[3]+" | ");
+		System.out.println("--------------");
+		System.out.println(board[4]+" | "+board[5]+" | "+board[6]+" | ");
+		System.out.println("--------------");
+		System.out.println(board[7]+" | "+board[8]+" | "+board[9]+" | ");
+		System.out.println("--------------");
 	}
 
 }
