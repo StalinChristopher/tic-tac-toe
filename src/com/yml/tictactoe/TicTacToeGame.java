@@ -30,9 +30,14 @@ public class TicTacToeGame {
 		if(ch == 'X') {
 			playerChoice = 'X';
 			computerChoice = 'O';
-		}else {
+			System.out.println("Player has chosen X");
+		}else if(ch == 'O') {
 			playerChoice = 'O';
 			computerChoice = 'X';
+			System.out.println("Player has chose O");
+		}else {
+			System.out.println("Invalid choice!!!");
+			choice();
 		}
 			
 		
