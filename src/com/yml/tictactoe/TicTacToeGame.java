@@ -46,13 +46,13 @@ public class TicTacToeGame {
 	
 	public void showBoard() {
 		System.out.println("Displaying the board:\n");
-		System.out.println("--------------");
-		System.out.println(board[1]+" | "+board[2]+" | "+board[3]+" | ");
-		System.out.println("--------------");
-		System.out.println(board[4]+" | "+board[5]+" | "+board[6]+" | ");
-		System.out.println("--------------");
-		System.out.println(board[7]+" | "+board[8]+" | "+board[9]+" | ");
-		System.out.println("--------------");
+		System.out.println("------------");
+		System.out.println(" "+board[1]+" | "+board[2]+" | "+board[3]+" | ");
+		System.out.println("------------");
+		System.out.println(" "+board[4]+" | "+board[5]+" | "+board[6]+" | ");
+		System.out.println("------------");
+		System.out.println(" "+board[7]+" | "+board[8]+" | "+board[9]+" | ");
+		System.out.println("------------");
 	}
 	
 	public void selectLocation() {
@@ -62,6 +62,14 @@ public class TicTacToeGame {
 		while(location < 1 || location > 9) {
 			System.out.println("Enter a valid location between 1 and 9");
 			location = in.nextInt();
+		}
+		if(board[location] == ' ') {
+			System.out.println("Your location has been selected in the board\n");
+			board[location] = playerChoice;
+			showBoard();
+		}else {
+			System.out.println("Please enter another location as the previous location has already been occupied\n");
+			selectLocation();
 		}
 	}
 	
