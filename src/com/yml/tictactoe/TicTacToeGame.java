@@ -54,5 +54,16 @@ public class TicTacToeGame {
 		System.out.println(board[7]+" | "+board[8]+" | "+board[9]+" | ");
 		System.out.println("--------------");
 	}
+	
+	public void selectLocation() {
+		Scanner in = new Scanner(System.in);
+		System.out.println("Enter the location where you want to enter "+playerChoice+" in the board");
+		int location  = in.nextInt();
+		while(location < 1 || location > 9) {
+			System.out.println("Enter a valid location between 1 and 9");
+			location = in.nextInt();
+		}
+	}
+	
 
 }
