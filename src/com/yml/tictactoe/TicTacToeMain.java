@@ -6,9 +6,10 @@ public class TicTacToeMain {
 		System.out.println("Welcome to tictactoe game");
 		TicTacToeGame game = new TicTacToeGame();
 		game.createBoard();
-		game.choice();
-		game.showBoard();
-		game.selectLocation();
+//		game.choice();
+//		game.showBoard();
+//		game.selectLocation();
+		game.toss();
 	}
 
 }
