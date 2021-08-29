@@ -15,6 +15,8 @@ public class TicTacToeGame {
 	//variables to choose X or O for player and computer
 	char playerChoice, computerChoice;
 	
+	private Random random = new Random();
+	
 	/**
 	 * @method to create an empty board
 	 */
@@ -33,11 +35,13 @@ public class TicTacToeGame {
 		if(ch == 'X') {
 			playerChoice = 'X';
 			computerChoice = 'O';
-			System.out.println("Player has chosen X");
+			System.out.println("Player has chosen X\n");
+			selectLocation();
 		}else if(ch == 'O') {
 			playerChoice = 'O';
 			computerChoice = 'X';
-			System.out.println("Player has chose O");
+			System.out.println("Player has chosen O\n");
+			selectLocation();
 		}else {
 			System.out.println("Invalid choice!!!");
 			choice();
@@ -56,7 +60,6 @@ public class TicTacToeGame {
 	}
 	
 	public void selectLocation() {
-		Scanner in = new Scanner(System.in);
 		System.out.println("Enter the location where you want to enter "+playerChoice+" in the board");
 		int location  = in.nextInt();
 		while(location < 1 || location > 9) {
@@ -70,6 +73,19 @@ public class TicTacToeGame {
 		}else {
 			System.out.println("Please enter another location as the previous location has already been occupied\n");
 			selectLocation();
+		}
+	}
+	
+	public void toss() {
+		System.out.println("Enter your choice 1.Heads  2.Tails");
+		int choice = in.nextInt();
+		int tossChoice = random.nextInt(2)+1;
+		System.out.println("Random : "+tossChoice);
+		if(choice == tossChoice) {
+			System.out.println("You have won the toss. You will play first.\n");
+			choice();
+		}else {
+			System.out.println("Sorry! You have lost the toss. Computer will play first.\n");
 		}
 	}
 	
