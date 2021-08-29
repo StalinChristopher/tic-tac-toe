@@ -115,10 +115,10 @@ public class TicTacToeGame {
 		possibilities[6] = "" + board[1] + board[5] + board[9];
 		possibilities[7] = "" + board[3] + board[5] + board[7];
 		for (int i = 0; i < 8; i++) {
-			if (possibilities[i] == "XXX") {
+			if (possibilities[i].equals("XXX")) {
 				result = 'X';
 				break;
-			}else if(possibilities[i]=="OOO") {
+			}else if(possibilities[i].equals("OOO")) {
 				result = 'O';
 				break;
 			}
@@ -146,7 +146,7 @@ public class TicTacToeGame {
 	private void computerTurn() {
 		// TODO Auto-generated method stub
 		System.out.println("Here computer will continue the game");
-		
+		playerTurn();
 		
 	}
 
