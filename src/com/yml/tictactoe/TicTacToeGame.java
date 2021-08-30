@@ -277,18 +277,28 @@ public class TicTacToeGame {
 	 * @method to find a available corner, centre or if not both then a random position on the board
 	 */
 	public void cornerCentreRandom() {
-		int corners[] = {1,3,7,9}; //These are the corner index of the board
+		int corners[] = { 1, 3, 7, 9 }; // These are the corner index of the board
 		boolean flag = true;
-		for(int i :corners) {
-			if(board[i] == ' ') {
+		int emptyIndexFill = 0;
+		int randIndex;
+		for (int i : corners) {
+			if (board[i] == ' ') {
 				board[i] = computerChoice;
 				flag = false;
 				break;
 			}
 		}
-		if(flag) {
-			if(board[5] == ' ') {
+		if (flag) {
+			if (board[5] == ' ') {
 				board[5] = computerChoice;
+			} else {
+				while(emptyIndexFill==0) {
+					randIndex = random.nextInt(9)+1;
+					if(board[randIndex]== ' ') {
+						emptyIndexFill = 1;
+						board[randIndex] = computerChoice;
+					}
+				}
 			}
 		}
 	}
