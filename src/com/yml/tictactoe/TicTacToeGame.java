@@ -17,12 +17,11 @@ public class TicTacToeGame {
 	// variables to choose X or O for player and computer
 	char playerChoice, computerChoice;
 
-	//Random class object
+	// Random class object
 	private Random random = new Random();
-	
-	//variable to decide turn
-	private String turn;
-	
+
+	//variable to shift turns between player and computer
+	private int winFlag;
 
 	/**
 	 * @method to create an empty board
@@ -53,6 +52,9 @@ public class TicTacToeGame {
 		}
 	}
 
+	/**
+	 * @method To display the board
+	 */
 	public void showBoard() {
 		System.out.println("Displaying the board:\n");
 		System.out.println("------------");
@@ -64,6 +66,9 @@ public class TicTacToeGame {
 		System.out.println("------------");
 	}
 
+	/**
+	 * @method To select a location from the user
+	 */
 	public void selectLocation() {
 		System.out.println("Enter the location where you want to enter " + playerChoice + " in the board");
 		int location = in.nextInt();
@@ -75,24 +80,17 @@ public class TicTacToeGame {
 			System.out.println("Your location has been selected in the board\n");
 			board[location] = playerChoice;
 			showBoard();
-			char winVariable = checkWinner();
-			if(winVariable == playerChoice) {
-				System.out.println("Congratulations!!! You have won the game");
-				showBoard();
-			}else if(winVariable == computerChoice) {
-				System.out.println("Sorry!!! Computer has won the game");
-				showBoard();
-			}else if(checkTie()==1) {
-				System.out.println("Game has been tied");
-				showBoard();
-			}
-			
+			checkWinCondition();
+
 		} else {
 			System.out.println("Please enter another location as the previous location has already been occupied\n");
 			selectLocation();
 		}
 	}
 
+	/**
+	 * @method Toss to decide who plays first
+	 */
 	public void toss() {
 		System.out.println("Enter your choice 1.Heads  2.Tails");
 		int choice = in.nextInt();
@@ -107,6 +105,9 @@ public class TicTacToeGame {
 		}
 	}
 
+	/**
+	 * @method To check if all positions are occupied
+	 */
 	public int checkTie() {
 		for (int i = 1; i <= 9; i++) {
 			if (board[i] == ' ')
@@ -115,9 +116,12 @@ public class TicTacToeGame {
 		return 1;
 	}
 
-	public char checkWinner() {
+	/**
+	 * @method to check if any one of the possibilities to win satisfy
+	 */
+	public char checkWinnerExist() {
 		String[] possibilities = new String[8];
-		char result='N';
+		char result = 'N';
 		possibilities[0] = "" + board[1] + board[2] + board[3];
 		possibilities[1] = "" + board[4] + board[5] + board[6];
 		possibilities[2] = "" + board[7] + board[8] + board[9];
@@ -130,36 +134,57 @@ public class TicTacToeGame {
 			if (possibilities[i].equals("XXX")) {
 				result = 'X';
 				break;
-			}else if(possibilities[i].equals("OOO")) {
+			} else if (possibilities[i].equals("OOO")) {
 				result = 'O';
 				break;
 			}
 		}
 		return result;
 	}
-	
+
+	/**
+	 * @method to check if the player can win the game or if not select a new location
+	 */
 	public void playerTurn() {
-		char winVariable = checkWinner();
-		if(winVariable == playerChoice) {
-			System.out.println("Congratulations!!! You have won the game");
-			showBoard();
-		}else if(winVariable == computerChoice) {
-			System.out.println("Sorry!!! Computer has won the game");
-			showBoard();
-		}else if(checkTie()==1) {
-			System.out.println("Game has been tied");
-			showBoard();
-		}else {
+		checkWinCondition();
+		if (winFlag == 0) {
 			selectLocation();
-			computerTurn();
+			if(winFlag==0) {
+				computerTurn();
+			}
 		}
 	}
 
+	/**
+	 * @method to set the winFlag variable to decide if the player or computer should play next turn
+	 */
+	public void checkWinCondition() {
+		char winVariable = checkWinnerExist();
+		if (winVariable == playerChoice) {
+			System.out.println("Congratulations!!! You have won the game");
+			winFlag=1;
+		} else if (winVariable == computerChoice) {
+			System.out.println("Sorry!!! Computer has won the game");
+			winFlag=1;
+		} else if (checkTie() == 1) {
+			System.out.println("Game has been tied");
+			winFlag=1;
+		}else {
+			winFlag=0;
+		}
+	}
+
+	/**
+	 * @method to check if the computer can win the game or block move the player might win or choose random location in the board randomly
+	 */
 	private void computerTurn() {
 		System.out.println("Here computer will continue the game");
-		
-		playerTurn();
-		
+		checkWinCondition();
+		if(winFlag==0) {
+			playerTurn();
+		}
+
+
 	}
 
 }
