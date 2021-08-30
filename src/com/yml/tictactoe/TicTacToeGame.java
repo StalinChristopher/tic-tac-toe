@@ -30,8 +30,6 @@ public class TicTacToeGame {
 		for (int i = 1; i < 10; i++) {
 			board[i] = ' ';
 		}
-		board[2] = 'O';
-		board[5] = 'O';
 	}
 
 	/**
@@ -181,7 +179,7 @@ public class TicTacToeGame {
 	}
 
 	/**
-	 * @method to check if the computer can win the game or block move the player might win or choose random location in the board randomly
+	 * @method to check if the computer can win the game or block the player's winning move or choose random location in the board
 	 */
 	private void computerTurn() {
 		System.out.println("Computer is playing right now ......");
