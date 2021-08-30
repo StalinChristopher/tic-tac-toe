@@ -75,6 +75,18 @@ public class TicTacToeGame {
 			System.out.println("Your location has been selected in the board\n");
 			board[location] = playerChoice;
 			showBoard();
+			char winVariable = checkWinner();
+			if(winVariable == playerChoice) {
+				System.out.println("Congratulations!!! You have won the game");
+				showBoard();
+			}else if(winVariable == computerChoice) {
+				System.out.println("Sorry!!! Computer has won the game");
+				showBoard();
+			}else if(checkTie()==1) {
+				System.out.println("Game has been tied");
+				showBoard();
+			}
+			
 		} else {
 			System.out.println("Please enter another location as the previous location has already been occupied\n");
 			selectLocation();
@@ -144,8 +156,8 @@ public class TicTacToeGame {
 	}
 
 	private void computerTurn() {
-		// TODO Auto-generated method stub
 		System.out.println("Here computer will continue the game");
+		
 		playerTurn();
 		
 	}
