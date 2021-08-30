@@ -302,5 +302,7 @@ public class TicTacToeGame {
 			}
 		}
 	}
+	
+	// UC12 code is already present in the program as the game runs properly and ends with the player or computer winning or results in the draw if all the positions are occupied
 
 }
