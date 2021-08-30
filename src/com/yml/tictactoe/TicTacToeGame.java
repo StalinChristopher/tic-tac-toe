@@ -30,6 +30,8 @@ public class TicTacToeGame {
 		for (int i = 1; i < 10; i++) {
 			board[i] = ' ';
 		}
+		board[2] = 'O';
+		board[5] = 'O';
 	}
 
 	/**
@@ -94,6 +96,10 @@ public class TicTacToeGame {
 	public void toss() {
 		System.out.println("Enter your choice 1.Heads  2.Tails");
 		int choice = in.nextInt();
+		while (choice<1 ||choice>2) {
+			System.out.println("Invalid choice!! Enter a valid choice between 1 and 2");
+			choice = in.nextInt();
+		}
 		int tossChoice = random.nextInt(2) + 1;
 		System.out.println("Random : " + tossChoice);
 		if (choice == tossChoice) {
@@ -178,8 +184,47 @@ public class TicTacToeGame {
 	 * @method to check if the computer can win the game or block move the player might win or choose random location in the board randomly
 	 */
 	private void computerTurn() {
-		System.out.println("Here computer will continue the game");
+		System.out.println("Computer is playing right now ......");
 		checkWinCondition();
+		if(winFlag==0) {
+			if((board[1]==' ')&&((board[2]==board[3]&&board[2]==computerChoice)||(board[4]==board[7]&&board[4]==computerChoice)||(board[5]==board[9]&&board[5]==computerChoice)))
+			{
+				board[1]=computerChoice;			
+			}
+			else if((board[2]==' ')&&((board[1]==board[3]&&board[3]==computerChoice)||(board[5]==board[8]&&board[8]==computerChoice)))
+			{
+				board[2]=computerChoice;
+			}
+			else if((board[3]==' ')&&((board[1]==board[2]&&board[2]==computerChoice)||(board[6]==board[9]&&board[9]==computerChoice)||(board[5]==board[7]&&board[7]==computerChoice)))
+			{
+				board[3]=computerChoice;
+			}
+			else if((board[4]==' ')&&((board[1]==board[7]&&board[1]==computerChoice)||(board[5]==board[6]&&board[6]==computerChoice)))
+			{
+				board[4]=computerChoice;
+			}
+			else if((board[5]==' ')&&((board[1]==board[9]&&board[2]==computerChoice)||(board[7]==board[3]&&board[7]==computerChoice)||(board[2]==board[8]&&board[8]==computerChoice)||(board[4]==board[6]&&board[6]==computerChoice)))
+			{
+				board[5]=computerChoice;
+			}
+			else if((board[6]==' ')&&((board[9]==board[3]&&board[3]==computerChoice)||(board[5]==board[4]&&board[4]==computerChoice)))
+			{
+				board[6]=computerChoice;
+			}
+			else if((board[7]==' ')&&((board[1]==board[4]&&board[4]==computerChoice)||(board[3]==board[5]&&board[3]==computerChoice)||(board[8]==board[9]&&board[8]==computerChoice)))
+			{
+				board[3]=computerChoice;
+			}
+			else if((board[8]==' ')&&((board[9]==board[7]&&board[7]==computerChoice)||(board[2]==board[5]&&board[2]==computerChoice)))
+			{
+				board[8]=computerChoice;
+			}
+			else if((board[9]==' ')&&((board[1]==board[5]&&board[5]==computerChoice)||(board[6]==board[3]&&board[3]==computerChoice)||(board[8]==board[7]&&board[7]==computerChoice)))
+			{
+				board[9]=computerChoice;
+			}
+		}
+		showBoard();
 		if(winFlag==0) {
 			playerTurn();
 		}
