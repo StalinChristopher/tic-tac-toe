@@ -182,7 +182,7 @@ public class TicTacToeGame {
 	 * @method to check if the computer can win the game or block the player's winning move or choose random location in the board
 	 */
 	private void computerTurn() {
-		System.out.println("Computer is playing right now ......");
+		System.out.println("Computer is playing right now ......\n");
 		checkWinCondition();
 		if(winFlag==0) {
 			if((board[1]==' ')&&((board[2]==board[3]&&board[2]==computerChoice)||(board[4]==board[7]&&board[4]==computerChoice)||(board[5]==board[9]&&board[5]==computerChoice)))
@@ -219,6 +219,44 @@ public class TicTacToeGame {
 			}
 			else if((board[9]==' ')&&((board[1]==board[5]&&board[5]==computerChoice)||(board[6]==board[3]&&board[3]==computerChoice)||(board[8]==board[7]&&board[7]==computerChoice)))
 			{
+				board[9]=computerChoice;
+			}
+			
+			//Rest of the if else conditions will block the player's move in case the player is about to win
+			else if((board[1]==' ')&&((board[2]==board[3]&&board[2]==playerChoice)||(board[4]==board[7]&&board[4]==playerChoice)||(board[5]==board[9]&&board[5]==playerChoice)))
+			{
+				board[1]=computerChoice;	
+			}
+			else if((board[2]==' ')&&((board[1]==board[3]&&board[3]==playerChoice)||(board[5]==board[8]&&board[8]==playerChoice)))
+			{
+				board[2]=computerChoice;
+			}
+			else if((board[3]==' ')&&((board[1]==board[2]&&board[2]==playerChoice)||(board[6]==board[9]&&board[9]==playerChoice)||(board[5]==board[7]&&board[7]==playerChoice)))
+			{
+				board[3]=computerChoice;
+			}
+			else  if((board[4]==' ')&&((board[1]==board[7]&&board[1]==playerChoice)||(board[5]==board[6]&&board[6]==playerChoice)))
+			{
+				board[4]=computerChoice;
+			}	
+			else if((board[5]==' ')&&((board[1]==board[9]&&board[1]==playerChoice)||(board[7]==board[3]&&board[7]==playerChoice)||(board[2]==board[8]&&board[8]==playerChoice)||(board[4]==board[6]&&board[6]==playerChoice)))
+			{
+				board[5]=computerChoice;
+			}
+			else if((board[6]==' ')&&((board[9]==board[3]&&board[3]==playerChoice)||(board[5]==board[4]&&board[4]==playerChoice)))
+			{
+				board[6]=computerChoice;
+			}
+			else 	if((board[7]==' ')&&((board[1]==board[4]&&board[4]==playerChoice)||(board[6]==board[9]&&board[9]==playerChoice)||(board[5]==board[7]&&board[7]==playerChoice)))
+			{
+				board[7]=computerChoice;
+			}
+			else if((board[8]==' ')&&((board[9]==board[7]&&board[7]==playerChoice)||(board[2]==board[5]&&board[2]==playerChoice)))
+			{
+				board[8]=computerChoice;
+			}
+			else if((board[9]==' ')&&((board[1]==board[5]&&board[5]==playerChoice)||(board[6]==board[3]&&board[3]==playerChoice)||(board[8]==board[7]&&board[7]==playerChoice)))
+			{	
 				board[9]=computerChoice;
 			}
 		}
