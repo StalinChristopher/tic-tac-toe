@@ -259,6 +259,11 @@ public class TicTacToeGame {
 			{	
 				board[9]=computerChoice;
 			}
+			
+			//Selecting random corners or centre of the board or if both are not available then any random position
+			else {
+				cornerCentreRandom();
+			}
 		}
 		showBoard();
 		if(winFlag==0) {
@@ -266,6 +271,18 @@ public class TicTacToeGame {
 		}
 
 
+	}
+
+	public void cornerCentreRandom() {
+		int corners[] = {1,3,7,9}; //These are the corner index of the board
+		for(int i :corners) {
+			if(board[i] == ' ') {
+				board[i] = computerChoice;
+				break;
+			}
+		}
+		
+		
 	}
 
 }
