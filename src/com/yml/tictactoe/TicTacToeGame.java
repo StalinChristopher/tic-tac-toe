@@ -1,5 +1,6 @@
 package com.yml.tictactoe;
 
+import java.lang.annotation.Repeatable;
 import java.util.*;
 
 /**
@@ -20,7 +21,7 @@ public class TicTacToeGame {
 	// Random class object
 	private Random random = new Random();
 
-	//variable to shift turns between player and computer
+	// variable to shift turns between player and computer
 	private int winFlag;
 
 	/**
@@ -38,6 +39,7 @@ public class TicTacToeGame {
 	public void choice() {
 		System.out.println("Choose the letter(X/O) ");
 		char ch = in.next().charAt(0);
+		ch = Character.toUpperCase(ch);
 		if (ch == 'X') {
 			playerChoice = 'X';
 			computerChoice = 'O';
@@ -94,7 +96,7 @@ public class TicTacToeGame {
 	public void toss() {
 		System.out.println("Enter your choice 1.Heads  2.Tails");
 		int choice = in.nextInt();
-		while (choice<1 ||choice>2) {
+		while (choice < 1 || choice > 2) {
 			System.out.println("Invalid choice!! Enter a valid choice between 1 and 2");
 			choice = in.nextInt();
 		}
@@ -147,134 +149,138 @@ public class TicTacToeGame {
 	}
 
 	/**
-	 * @method to check if the player can win the game or if not select a new location
+	 * @method to check if the player can win the game or if not select a new
+	 *         location
 	 */
 	public void playerTurn() {
 		checkWinCondition();
 		if (winFlag == 0) {
 			selectLocation();
-			if(winFlag==0) {
+			if (winFlag == 0) {
 				computerTurn();
 			}
 		}
 	}
 
 	/**
-	 * @method to set the winFlag variable to decide if the player or computer should play next turn
+	 * @method to set the winFlag variable to decide if the player or computer
+	 *         should play next turn
 	 */
 	public void checkWinCondition() {
 		char winVariable = checkWinnerExist();
 		if (winVariable == playerChoice) {
 			System.out.println("Congratulations!!! You have won the game");
-			winFlag=1;
+			repeatGame();
+			winFlag = 1;
 		} else if (winVariable == computerChoice) {
 			System.out.println("Sorry!!! Computer has won the game");
-			winFlag=1;
+			repeatGame();
+			winFlag = 1;
 		} else if (checkTie() == 1) {
 			System.out.println("Game has been tied");
-			winFlag=1;
-		}else {
-			winFlag=0;
+			repeatGame();
+			winFlag = 1;
+		} else {
+			winFlag = 0;
 		}
 	}
 
 	/**
-	 * @method to check if the computer can win the game or block the player's winning move or choose random location in the board
+	 * @method to check if the computer can win the game or block the player's
+	 *         winning move or choose random location in the board
 	 */
 	private void computerTurn() {
 		System.out.println("Computer is playing right now ......\n");
 		checkWinCondition();
-		if(winFlag==0) {
-			if((board[1]==' ')&&((board[2]==board[3]&&board[2]==computerChoice)||(board[4]==board[7]&&board[4]==computerChoice)||(board[5]==board[9]&&board[5]==computerChoice)))
-			{
-				board[1]=computerChoice;			
+		if (winFlag == 0) {
+			if ((board[1] == ' ') && ((board[2] == board[3] && board[2] == computerChoice)
+					|| (board[4] == board[7] && board[4] == computerChoice)
+					|| (board[5] == board[9] && board[5] == computerChoice))) {
+				board[1] = computerChoice;
+			} else if ((board[2] == ' ') && ((board[1] == board[3] && board[3] == computerChoice)
+					|| (board[5] == board[8] && board[8] == computerChoice))) {
+				board[2] = computerChoice;
+			} else if ((board[3] == ' ') && ((board[1] == board[2] && board[2] == computerChoice)
+					|| (board[6] == board[9] && board[9] == computerChoice)
+					|| (board[5] == board[7] && board[7] == computerChoice))) {
+				board[3] = computerChoice;
+			} else if ((board[4] == ' ') && ((board[1] == board[7] && board[1] == computerChoice)
+					|| (board[5] == board[6] && board[6] == computerChoice))) {
+				board[4] = computerChoice;
+			} else if ((board[5] == ' ') && ((board[1] == board[9] && board[2] == computerChoice)
+					|| (board[7] == board[3] && board[7] == computerChoice)
+					|| (board[2] == board[8] && board[8] == computerChoice)
+					|| (board[4] == board[6] && board[6] == computerChoice))) {
+				board[5] = computerChoice;
+			} else if ((board[6] == ' ') && ((board[9] == board[3] && board[3] == computerChoice)
+					|| (board[5] == board[4] && board[4] == computerChoice))) {
+				board[6] = computerChoice;
+			} else if ((board[7] == ' ') && ((board[1] == board[4] && board[4] == computerChoice)
+					|| (board[3] == board[5] && board[3] == computerChoice)
+					|| (board[8] == board[9] && board[8] == computerChoice))) {
+				board[3] = computerChoice;
+			} else if ((board[8] == ' ') && ((board[9] == board[7] && board[7] == computerChoice)
+					|| (board[2] == board[5] && board[2] == computerChoice))) {
+				board[8] = computerChoice;
+			} else if ((board[9] == ' ') && ((board[1] == board[5] && board[5] == computerChoice)
+					|| (board[6] == board[3] && board[3] == computerChoice)
+					|| (board[8] == board[7] && board[7] == computerChoice))) {
+				board[9] = computerChoice;
 			}
-			else if((board[2]==' ')&&((board[1]==board[3]&&board[3]==computerChoice)||(board[5]==board[8]&&board[8]==computerChoice)))
-			{
-				board[2]=computerChoice;
+
+			// Rest of the if else conditions will block the player's move in case the
+			// player is about to win
+			else if ((board[1] == ' ') && ((board[2] == board[3] && board[2] == playerChoice)
+					|| (board[4] == board[7] && board[4] == playerChoice)
+					|| (board[5] == board[9] && board[5] == playerChoice))) {
+				board[1] = computerChoice;
+			} else if ((board[2] == ' ') && ((board[1] == board[3] && board[3] == playerChoice)
+					|| (board[5] == board[8] && board[8] == playerChoice))) {
+				board[2] = computerChoice;
+			} else if ((board[3] == ' ') && ((board[1] == board[2] && board[2] == playerChoice)
+					|| (board[6] == board[9] && board[9] == playerChoice)
+					|| (board[5] == board[7] && board[7] == playerChoice))) {
+				board[3] = computerChoice;
+			} else if ((board[4] == ' ') && ((board[1] == board[7] && board[1] == playerChoice)
+					|| (board[5] == board[6] && board[6] == playerChoice))) {
+				board[4] = computerChoice;
+			} else if ((board[5] == ' ') && ((board[1] == board[9] && board[1] == playerChoice)
+					|| (board[7] == board[3] && board[7] == playerChoice)
+					|| (board[2] == board[8] && board[8] == playerChoice)
+					|| (board[4] == board[6] && board[6] == playerChoice))) {
+				board[5] = computerChoice;
+			} else if ((board[6] == ' ') && ((board[9] == board[3] && board[3] == playerChoice)
+					|| (board[5] == board[4] && board[4] == playerChoice))) {
+				board[6] = computerChoice;
+			} else if ((board[7] == ' ') && ((board[1] == board[4] && board[4] == playerChoice)
+					|| (board[6] == board[9] && board[9] == playerChoice)
+					|| (board[5] == board[7] && board[7] == playerChoice))) {
+				board[7] = computerChoice;
+			} else if ((board[8] == ' ') && ((board[9] == board[7] && board[7] == playerChoice)
+					|| (board[2] == board[5] && board[2] == playerChoice))) {
+				board[8] = computerChoice;
+			} else if ((board[9] == ' ') && ((board[1] == board[5] && board[5] == playerChoice)
+					|| (board[6] == board[3] && board[3] == playerChoice)
+					|| (board[8] == board[7] && board[7] == playerChoice))) {
+				board[9] = computerChoice;
 			}
-			else if((board[3]==' ')&&((board[1]==board[2]&&board[2]==computerChoice)||(board[6]==board[9]&&board[9]==computerChoice)||(board[5]==board[7]&&board[7]==computerChoice)))
-			{
-				board[3]=computerChoice;
-			}
-			else if((board[4]==' ')&&((board[1]==board[7]&&board[1]==computerChoice)||(board[5]==board[6]&&board[6]==computerChoice)))
-			{
-				board[4]=computerChoice;
-			}
-			else if((board[5]==' ')&&((board[1]==board[9]&&board[2]==computerChoice)||(board[7]==board[3]&&board[7]==computerChoice)||(board[2]==board[8]&&board[8]==computerChoice)||(board[4]==board[6]&&board[6]==computerChoice)))
-			{
-				board[5]=computerChoice;
-			}
-			else if((board[6]==' ')&&((board[9]==board[3]&&board[3]==computerChoice)||(board[5]==board[4]&&board[4]==computerChoice)))
-			{
-				board[6]=computerChoice;
-			}
-			else if((board[7]==' ')&&((board[1]==board[4]&&board[4]==computerChoice)||(board[3]==board[5]&&board[3]==computerChoice)||(board[8]==board[9]&&board[8]==computerChoice)))
-			{
-				board[3]=computerChoice;
-			}
-			else if((board[8]==' ')&&((board[9]==board[7]&&board[7]==computerChoice)||(board[2]==board[5]&&board[2]==computerChoice)))
-			{
-				board[8]=computerChoice;
-			}
-			else if((board[9]==' ')&&((board[1]==board[5]&&board[5]==computerChoice)||(board[6]==board[3]&&board[3]==computerChoice)||(board[8]==board[7]&&board[7]==computerChoice)))
-			{
-				board[9]=computerChoice;
-			}
-			
-			//Rest of the if else conditions will block the player's move in case the player is about to win
-			else if((board[1]==' ')&&((board[2]==board[3]&&board[2]==playerChoice)||(board[4]==board[7]&&board[4]==playerChoice)||(board[5]==board[9]&&board[5]==playerChoice)))
-			{
-				board[1]=computerChoice;	
-			}
-			else if((board[2]==' ')&&((board[1]==board[3]&&board[3]==playerChoice)||(board[5]==board[8]&&board[8]==playerChoice)))
-			{
-				board[2]=computerChoice;
-			}
-			else if((board[3]==' ')&&((board[1]==board[2]&&board[2]==playerChoice)||(board[6]==board[9]&&board[9]==playerChoice)||(board[5]==board[7]&&board[7]==playerChoice)))
-			{
-				board[3]=computerChoice;
-			}
-			else  if((board[4]==' ')&&((board[1]==board[7]&&board[1]==playerChoice)||(board[5]==board[6]&&board[6]==playerChoice)))
-			{
-				board[4]=computerChoice;
-			}	
-			else if((board[5]==' ')&&((board[1]==board[9]&&board[1]==playerChoice)||(board[7]==board[3]&&board[7]==playerChoice)||(board[2]==board[8]&&board[8]==playerChoice)||(board[4]==board[6]&&board[6]==playerChoice)))
-			{
-				board[5]=computerChoice;
-			}
-			else if((board[6]==' ')&&((board[9]==board[3]&&board[3]==playerChoice)||(board[5]==board[4]&&board[4]==playerChoice)))
-			{
-				board[6]=computerChoice;
-			}
-			else 	if((board[7]==' ')&&((board[1]==board[4]&&board[4]==playerChoice)||(board[6]==board[9]&&board[9]==playerChoice)||(board[5]==board[7]&&board[7]==playerChoice)))
-			{
-				board[7]=computerChoice;
-			}
-			else if((board[8]==' ')&&((board[9]==board[7]&&board[7]==playerChoice)||(board[2]==board[5]&&board[2]==playerChoice)))
-			{
-				board[8]=computerChoice;
-			}
-			else if((board[9]==' ')&&((board[1]==board[5]&&board[5]==playerChoice)||(board[6]==board[3]&&board[3]==playerChoice)||(board[8]==board[7]&&board[7]==playerChoice)))
-			{	
-				board[9]=computerChoice;
-			}
-			
-			//Selecting random corners or centre of the board or if both are not available then any random position
+
+			// Selecting random corners or centre of the board or if both are not available
+			// then any random position
 			else {
 				cornerCentreRandom();
 			}
 		}
 		showBoard();
-		if(winFlag==0) {
+		if (winFlag == 0) {
 			playerTurn();
 		}
-
 
 	}
 
 	/**
-	 * @method to find a available corner, centre or if not both then a random position on the board
+	 * @method to find a available corner, centre or if not both then a random
+	 *         position on the board
 	 */
 	public void cornerCentreRandom() {
 		int corners[] = { 1, 3, 7, 9 }; // These are the corner index of the board
@@ -292,9 +298,9 @@ public class TicTacToeGame {
 			if (board[5] == ' ') {
 				board[5] = computerChoice;
 			} else {
-				while(emptyIndexFill==0) {
-					randIndex = random.nextInt(9)+1;
-					if(board[randIndex]== ' ') {
+				while (emptyIndexFill == 0) {
+					randIndex = random.nextInt(9) + 1;
+					if (board[randIndex] == ' ') {
 						emptyIndexFill = 1;
 						board[randIndex] = computerChoice;
 					}
@@ -302,7 +308,26 @@ public class TicTacToeGame {
 			}
 		}
 	}
-	
-	// UC12 code is already present in the program as the game runs properly and ends with the player or computer winning or results in the draw if all the positions are occupied
+
+	// UC12 code is already present in the program as the game runs properly and
+	// ends with the player or computer winning or results in the draw if all the
+	// positions are occupied
+
+	/**
+	 * @method to ask the player if he/she wants to play again
+	 */
+	public void repeatGame() {
+		System.out.println("\nDo you want to play again? Enter your choice(1/2) \n1.Yes\n2.No\n");
+		int choice = in.nextInt();
+		while(choice<1 || choice >2){
+			System.out.println("Invalid choice!!! Please enter a valid choice between 1 and 2");
+			choice = in.nextInt();
+		}
+		if (choice == 1) {
+			createBoard();  //Creating a new board
+			choice();		//Enter player's choice of letter (X/O)
+			toss();			//Initialise the game by tossing a coin to decide who plays first
+		}
+	}
 
 }
